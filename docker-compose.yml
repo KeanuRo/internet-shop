@@ -1,0 +1,40 @@
+version: '3.8'
+services:
+    backend:
+        build:
+            context: .
+            dockerfile: ./docker/backend/DockerFile
+        tty: true
+        working_dir: /var/www/backend
+        volumes:
+            - ./backend/:/var/www/backend
+
+    frontend:
+        build:
+            context: .
+            dockerfile: ./docker/frontend/DockerFile
+        working_dir: /var/www/frontend
+        volumes: 
+            - ./frontend/:/var/www/frontend
+
+    nginx:
+        image: nginx:alpine3.18
+        tty: true
+        ports:
+            - '80:80'
+        volumes:
+            - ./backend/:/var/www/backend
+            - ./frontend/:/var/www/frontend
+            - ./docker/nginx/conf.d/:/etc/nginx/conf.d/
+
+    db:
+        container_name: postgres
+        image: postgres:15.3
+        environment:
+            POSTGRES_USER: root
+            POSTGRES_PASSWORD: root
+            POSTGRES_DB: my_db
+        volumes:
+            - ./../postgres_data:/var/lib/postgresql/data/
+        ports:
+            - "5432:5432"
