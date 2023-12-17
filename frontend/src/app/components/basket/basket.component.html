@@ -1,0 +1,19 @@
+<div class="container">
+  <mat-card class="mat-card" *ngFor="let item of basket">
+    <mat-card-title>{{item.title}}</mat-card-title>
+    <img class="image" mat-card-image src="../../../{{item.image}}" />
+    <mat-card-content>
+      <p>Цена: {{item.price}} ₽</p>
+      <p>Чип: {{item.configure.chip}}</p>
+      <p>Жёсткий диск: {{item.configure.SSD}}</p>
+      <p>ОЗУ: {{item.configure.memory}}</p>
+      <p>Тип дисплея: {{item.configure.display}}</p>
+      <p>Год: {{item.configure.year}}</p>
+    </mat-card-content>
+    <mat-card-actions>
+      <button class="button" mat-flat-button color="primary">-</button>
+      <button class="button" mat-flat-button color="primary">+</button>
+    </mat-card-actions>
+  </mat-card>
+</div>
+
